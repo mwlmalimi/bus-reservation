@@ -14,5 +14,10 @@ class Route extends Model
   {
     return $this->hasMany('App\BookedBus');
   }
-  
+
+    public function Company_routes()
+    {
+      return $this->hasMany('App\CompanyRoute');
+    }
+
 }

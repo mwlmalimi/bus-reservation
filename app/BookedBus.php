@@ -20,4 +20,7 @@ class BookedBus extends Model
   {
     return $this->belongsTo('App\Route');
   }
+  public function passengers(){
+    return $this->hasMany('App\Passenger');
+  }
 }
