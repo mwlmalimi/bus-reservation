@@ -10,11 +10,13 @@ class CompanyRoute extends Model
     protected $fillable = [
       'company_id','route_id','fare','departure_time',
     ];
-     public function companies()
+
+     public function company()
      {
        return $this->belongsTo('App\Company');
      }
-     public function routes()
+
+     public function route()
      {
        return $this->belongsTo('App\Route);
      }

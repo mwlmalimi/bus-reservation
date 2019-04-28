@@ -15,7 +15,8 @@ class Company extends Model
   {
     return $this->hasMany('App\Bus');
   }
-  public function Company_routes(){
-    return $this->hasMany('App\CompanyRoute')
+  
+  public function companyRoutes(){
+    return $this->hasMany('App\CompanyRoute');
   }
 }
