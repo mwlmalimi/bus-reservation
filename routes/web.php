@@ -1,5 +1,5 @@
 <?php
-
+use App\Company;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'CompaniesController@index');
+Route::get('/buses', 'CompaniesController@index');
+Route::get('/schedules', 'CompaniesController@index');

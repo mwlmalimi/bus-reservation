@@ -4,18 +4,16 @@
 
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script type="text/javascript"
-      href="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("#companiesTable").DataTable()
-  })
-</script>
-
+      src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+@include('admin.includes.datatable_buttons')
+      
 @endsection
 
 @section('content')
 
 <div class="table-responsive-md">
+  
+  <h3 class="text-primary">Companies</h3><br>
 
   <table id="companiesTable"
         class="table table-striped table-hover table-bordered"
@@ -42,5 +40,41 @@
   </table>
 
 </div>
+
+<script>
+  $(document).ready(function () {
+    $("#companiesTable").DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+         {
+           extend: 'print',
+           exportOptions: {
+             columns: ":not(:last-child)"
+           },
+           title: "Companies",
+           messageTop: "The List Of Companies As Of {{date('d-m-Y')}}"
+         },
+          {
+            extend: 'excel',
+            exportOptions: {
+              columns: ":not(:last-child)"
+            },
+            title: "Companies",
+            messageTop: "The List Of Companies As Of {{date('d-m-Y')}}"
+         },
+          {
+            extend: 'pdf',
+            exportOptions: {
+              columns: ":not(:last-child)"
+            },
+            title: "Companies",
+            messageTop: "The List Of Companies As Of {{date('d-m-Y')}}"
+         }
+       ],
+      iDisplayLength: 5,
+      bLengthChange: false
+    })
+  })
+</script>
 
 @endsection
