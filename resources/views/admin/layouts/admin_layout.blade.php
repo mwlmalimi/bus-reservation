@@ -23,8 +23,12 @@
 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
       <ul class="navbar-nav">
+
         <li class="nav-item {{ isActiveURL('/') }}">
           <a class="nav-link" href="{{url('/')}}">Companies</a>
+        </li>
+        <li class="nav-item {{ isActiveURL('/routes') }}">
+          <a class="nav-link" href="{{url('/routes')}}">Routes</a>
         </li>
         <li class="nav-item {{ isActiveURL('/buses') }}">
           <a class="nav-link" href="{{url('/buses')}}">Buses</a>

@@ -2,22 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Route;
 use App\Company;
+use App\CompanyRoute;
 use Illuminate\Http\Request;
 
-class CompaniesController extends Controller
+class RoutesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($company_id = null)
     {
-      $companies = Company::all();
-      return view('admin.companies.companies', [
-        'companies' => $companies,
-      ]);
+      if($company_id) {
+        $route_ids = CompanyRoute::where('company_id', $company_id)
+                                ->pluck('id')->toArray();
+        $routes = Route::find($route_ids);
+        $company = Company::find($company_id);
+        return view('admin.companies.company_routes', [
+          'company' => $company,
+          'routes' => $routes,
+        ]);
+      } else {
+        $routes = Route::all();
+        return view('admin.routes', [
+          'routes' => $routes,
+        ]);
+      }
+
     }
 
     /**
@@ -44,10 +58,10 @@ class CompaniesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Company  $company
+     * @param  \App\Route  $route
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show(Route $route)
     {
         //
     }
@@ -55,10 +69,10 @@ class CompaniesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Company  $company
+     * @param  \App\Route  $route
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit(Route $route)
     {
         //
     }
@@ -67,10 +81,10 @@ class CompaniesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Company  $company
+     * @param  \App\Route  $route
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, Route $route)
     {
         //
     }
@@ -78,10 +92,10 @@ class CompaniesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Company  $company
+     * @param  \App\Route  $route
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(Route $route)
     {
         //
     }

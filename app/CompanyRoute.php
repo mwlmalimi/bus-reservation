@@ -18,6 +18,6 @@ class CompanyRoute extends Model
 
      public function route()
      {
-       return $this->belongsTo('App\Route);
+       return $this->belongsTo('App\Route');
      }
 }
