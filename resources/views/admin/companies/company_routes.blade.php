@@ -13,7 +13,11 @@
 
 <div class="table-responsive-md">
 
-  <h3 class="text-primary">{{$company->name}} Routes</h3><br>
+  <div class="page-header">
+    <h3 class="text-primary">{{$company->name}} Routes</h3>
+    <a class="btn btn-primary" href="{{ url('/company_routes/create/' . $company->id) }}"
+      title="Assign Routes">Assign</a>
+  </div>
 
   <table id="myTable"
         class="table table-striped table-hover table-bordered"

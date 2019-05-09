@@ -18,7 +18,6 @@ class CreateCompanyRoutesTable extends Migration
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('route_id');
             $table->bigInteger('fare');
-            $table->dateTime('departure_time');
             $table->timestamps();
 
             // Setting foreign keys

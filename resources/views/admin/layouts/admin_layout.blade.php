@@ -15,7 +15,13 @@
         margin: 0;
       }
       .content {
-        padding-top: 50px;
+        padding-top: 40px;
+      }
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px;
       }
     </style>
   </head>
@@ -23,15 +29,11 @@
 
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
       <ul class="navbar-nav">
-
-        <li class="nav-item {{ isActiveURL('/') }}">
-          <a class="nav-link" href="{{url('/')}}">Companies</a>
-        </li>
         <li class="nav-item {{ isActiveURL('/routes') }}">
           <a class="nav-link" href="{{url('/routes')}}">Routes</a>
         </li>
-        <li class="nav-item {{ isActiveURL('/buses') }}">
-          <a class="nav-link" href="{{url('/buses')}}">Buses</a>
+        <li class="nav-item {{ isActiveURL('/') }}">
+          <a class="nav-link" href="{{url('/')}}">Companies</a>
         </li>
         <li class="nav-item {{ isActiveURL('/schedules') }}">
           <a class="nav-link" href="{{url('/schedules')}}">Schedules</a>

@@ -11,35 +11,46 @@
 
 @section('content')
 
-<div class="table-responsive-md">
+<div class="row">
 
-  <h3 class="text-primary">Routes</h3><br>
+  <div class="col-12">
+    
+    <div class="page-header">
+      <h3 class="text-primary">Routes</h3>
+      <a class="btn btn-primary" href="#" title="Add Routes">Add Routes</a>
+    </div>
 
-  <table id="routesTable"
-        class="table table-striped table-hover table-bordered"
-        cellspacing="0" width="100%">
+    <div class="table-responsive-md">
 
-    <thead>
-      <tr>
-        <th class="th-sm">Name</th>
-        <th class="th-sm">Description</th>
-        <th class="th-sm">Actions</th>
-      </tr>
-    </thead>
+      <table id="routesTable"
+            class="table table-striped table-hover table-bordered"
+            cellspacing="0" width="100%">
 
-    <tbody>
-      @foreach($routes as $route)
-      <tr>
-        <td>{{ $route->name }}</td>
-        <td>{{ $route->description }}</td>
-        <td>
-          <button class="btn btn-danger" type="button">Delete</button>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
+        <thead>
+          <tr>
+            <th class="th-sm">Name</th>
+            <th class="th-sm">Description</th>
+            <th class="th-sm">Actions</th>
+          </tr>
+        </thead>
 
-  </table>
+        <tbody>
+          @foreach($routes as $route)
+          <tr>
+            <td>{{ $route->name }}</td>
+            <td>{{ $route->description }}</td>
+            <td>
+              <button class="btn btn-danger" type="button">Delete</button>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+
+      </table>
+
+    </div>
+    
+  </div>
 
 </div>
 

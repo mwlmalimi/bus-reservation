@@ -21,6 +21,10 @@ Route::delete('/companies', 'CompaniesController@destroy');
 
 Route::get('/routes/{company?}', 'RoutesController@index');
 
+Route::get('/company_routes/create/{company}', 'CompanyRoutesController@create');
+
+Route::post('/company_routes/{company}', 'CompanyRoutesController@store');
+
 Route::get('/buses', 'BusesController@index');
 
 Route::get('/schedules', 'CompaniesController@index');

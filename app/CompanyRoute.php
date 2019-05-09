@@ -8,7 +8,7 @@ class CompanyRoute extends Model
 {
     //attributes to be inserted
     protected $fillable = [
-      'company_id','route_id','fare','departure_time',
+      'company_id','route_id','fare',
     ];
 
      public function company()
