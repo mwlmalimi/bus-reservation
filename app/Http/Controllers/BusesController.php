@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bus;
+use App\Company;
 use Illuminate\Http\Request;
 
 class BusesController extends Controller
@@ -15,10 +16,7 @@ class BusesController extends Controller
     public function index()
     {
         //
-        $buses = Bus::all();
-        return view('admin.buses', [
-          'buses' => $buses,
-        ]);
+  
     }
 
     /**
@@ -26,9 +24,17 @@ class BusesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($company_id, $message = null)
     {
         //
+
+        $company = Company::find($company_id);
+        $buses = Bus::all();
+        return view('admin.companies.company_buses_form', [
+          'company' => $company,
+          'buses' => $buses,
+          'successMessage' => $message
+       ]);
     }
 
     /**
@@ -37,9 +43,16 @@ class BusesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+
+      public function store(Request $request, $company_id)
+      {
+        CompanyRoute::create([
+          'company_id' => $company_id,
+          'plate_number' => $request->plate_number,
+          'seats_count' => $request->seats_count,
+        ]);
+        return $this->create($company_id, 'Route Assigned Successfully');
+
     }
 
     /**
