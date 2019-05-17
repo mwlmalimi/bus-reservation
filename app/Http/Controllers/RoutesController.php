@@ -39,10 +39,11 @@ class RoutesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $message = null)
     {
-        //
+       //
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -52,7 +53,7 @@ class RoutesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                  //
     }
 
     /**
