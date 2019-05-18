@@ -56,19 +56,13 @@
                  href="{{ url('/company_buses/' . $company->id) }}">Buses</a>
                  <button class="btn btn-sm btn-danger" title="delete"
                    type="button"
-                   data-toggle="modal"
-                   data-target="#myModal">Delete</button>
-                   @include('admin.modals.confirmation_modal',
-                     [
-                        'url' => '/companies/' . $company->id
-                     ]
-                  )
+                   onclick="openConfirmModal({{$company}})">Delete</button>
               </div>
             </td>
           </tr>
           @endforeach
         </tbody>
-
+        @include('admin.modals.confirmation_modal')
       </table>
 
     </div>
@@ -111,6 +105,12 @@
       bLengthChange: false
     })
   })
+
+  function openConfirmModal(company) {
+    let url = '/companies/' + company.id
+     $("#confirmation_modal_form").attr('action', url)
+     $("#myModal").modal()
+  }
 </script>
 
 @endsection

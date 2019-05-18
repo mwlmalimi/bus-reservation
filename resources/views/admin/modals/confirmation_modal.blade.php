@@ -15,7 +15,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <form action="{{$url}}" method="post">
+        <form action="" method="post" id="confirmation_modal_form">
           @csrf
           @method('DELETE')
           <button type="submit" class="btn btn-primary">Okay</button>
