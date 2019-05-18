@@ -13,14 +13,6 @@ class BusesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index($company_id = null)
-    // {
-    //
-    //   $company = Company::find($company_id);
-    //   return view('admin.companies.company_buses', [
-    //     'company' => $company,
-    //   ]);
-    // }
     public function index($company_id = null)
     {
       if($company_id) {
@@ -46,15 +38,13 @@ class BusesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($company_id, $message = null)
+    public function create($company_id)
     {
         //
 
         $company = Company::find($company_id);
         return view('admin.companies.company_buses_form', [
           'company' => $company,
-
-          'successMessage' => $message
        ]);
     }
 
@@ -73,7 +63,7 @@ class BusesController extends Controller
           'plate_number' => $request->plate_number,
           'seats_count' => $request->seats_count,
         ]);
-        return $this->create($company_id, 'The Bus is Assigned Successfully');
+        return back()->with('message', 'The Bus is Assigned Successfully');
 
     }
 

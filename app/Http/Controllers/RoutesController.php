@@ -16,22 +16,10 @@ class RoutesController extends Controller
      */
     public function index($company_id = null)
     {
-      if($company_id) {
-        $route_ids = CompanyRoute::where('company_id', $company_id)
-                                ->pluck('id')->toArray();
-        $routes = Route::find($route_ids);
-        $company = Company::find($company_id);
-        return view('admin.companies.company_routes', [
-          'company' => $company,
-          'routes' => $routes,
-        ]);
-      } else {
-        $routes = Route::all();
-        return view('admin.routes', [
-          'routes' => $routes,
-        ]);
-      }
-
+      $routes = Route::all();
+      return view('admin.routes', [
+        'routes' => $routes,
+      ]);
     }
 
     /**
@@ -39,9 +27,9 @@ class RoutesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $message = null)
+    public function create()
     {
-       //
+       return view('admin.routes_form');
     }
 
 
@@ -53,7 +41,14 @@ class RoutesController extends Controller
      */
     public function store(Request $request)
     {
-                  //
+      Route::create(
+        [
+          'name' =>$request->name,
+          'description' =>$request->description,
+        ]);
+
+        $message='The company added successfully';
+        return back()->with('message', $message);
     }
 
     /**

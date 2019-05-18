@@ -14,9 +14,18 @@ class CompanyRoutesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($company_id)
     {
-        //
+      
+        $route_ids = CompanyRoute::where('company_id', $company_id)
+                                ->pluck('id')->toArray();
+        $routes = Route::find($route_ids);
+        $company = Company::find($company_id);
+        return view('admin.companies.company_routes', [
+          'company' => $company,
+          'routes' => $routes,
+        ]);
+
     }
 
     /**
@@ -24,14 +33,13 @@ class CompanyRoutesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($company_id, $message = null)
+    public function create($company_id)
     {
       $company = Company::find($company_id);
       $routes = Route::all();
       return view('admin.companies.company_routes_form', [
         'company' => $company,
         'routes' => $routes,
-        'successMessage' => $message,
       ]);
     }
 
@@ -48,7 +56,7 @@ class CompanyRoutesController extends Controller
         'route_id' => $request->route_id,
         'fare' => $request->fare,
       ]);
-      return $this->create($company_id, 'Route Assigned Successfully');
+      return back()->with('message', 'Route Assigned Successfully');
     }
 
     /**

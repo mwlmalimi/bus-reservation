@@ -27,7 +27,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.companies.company_form');
     }
 
     /**
@@ -38,7 +38,13 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Company::create(
+          [
+            'name' =>$request->name,
+          ]);
+
+          $message='The company added successfully';
+          return back()->with('message', $message);
     }
 
     /**
@@ -81,8 +87,9 @@ class CompaniesController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+      Company::where('id', $id)->delete();
+      return back()->with('message', 'The Company has been deleted successfully');
     }
 }

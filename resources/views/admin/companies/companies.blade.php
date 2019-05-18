@@ -20,6 +20,17 @@
       <a class="btn btn-primary" href="{{url('/companies/create')}}" title="Add Companies">Add Companies</a>
     </div>
 
+    @if(session('message'))
+    <div class="row">
+      <div class="col-12">
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success!</strong> {{session('message')}}.
+        </div>
+      </div>
+    </div>
+    @endif
+
     <div class="table-responsive-md">
 
       <table id="companiesTable"
@@ -40,10 +51,18 @@
             <td>
               <div class="btn-group">
                 <a class="btn btn-sm btn-warning" title="view routes"
-                  href="{{ url('/routes/' . $company->id) }}">Routes</a>
+                  href="{{ url('/company_routes/' . $company->id) }}">Routes</a>
                 <a class="btn btn-sm btn-dark" title="view buses"
-                 href="{{ url('/buses/' . $company->id) }}">Buses</a>
-                <button class="btn btn-sm btn-danger" title="delete">Delete</button>
+                 href="{{ url('/company_buses/' . $company->id) }}">Buses</a>
+                 <button class="btn btn-sm btn-danger" title="delete"
+                   type="button"
+                   data-toggle="modal"
+                   data-target="#myModal">Delete</button>
+                   @include('admin.modals.confirmation_modal',
+                     [
+                        'url' => '/companies/' . $company->id
+                     ]
+                  )
               </div>
             </td>
           </tr>

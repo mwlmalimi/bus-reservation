@@ -14,10 +14,10 @@
 <div class="row">
 
   <div class="col-12">
-    
+
     <div class="page-header">
       <h3 class="text-primary">Routes</h3>
-      <a class="btn btn-primary" href="#" title="Add Routes">Add Routes</a>
+      <a class="btn btn-primary" href="{{url('/routes/create')}}" title="Add Routes">Add Routes</a>
     </div>
 
     <div class="table-responsive-md">
@@ -49,7 +49,7 @@
       </table>
 
     </div>
-    
+
   </div>
 
 </div>

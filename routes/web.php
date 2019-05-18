@@ -19,15 +19,23 @@ Route::get('/', 'CompaniesController@index');
 
 Route::get('/companies/create/', 'CompaniesController@create');
 
-Route::delete('/companies', 'CompaniesController@destroy');
+Route::post('/companies', 'CompaniesController@store');
 
-Route::get('/routes/{company?}', 'RoutesController@index');
+Route::delete('/companies/{company}', 'CompaniesController@destroy');
+
+Route::get('/routes', 'RoutesController@index');
+
+Route::get('/routes/create/', 'RoutesController@create');
+
+Route::post('/routes', 'RoutesController@store');
+
+Route::get('/company_routes/{company}', 'CompanyRoutesController@index' );
 
 Route::get('/company_routes/create/{company}', 'CompanyRoutesController@create');
 
 Route::post('/company_routes/{company}', 'CompanyRoutesController@store');
 
-Route::get('/buses/{company?}', 'BusesController@index');
+Route::get('/company_buses/{company}', 'BusesController@index');
 
 Route::get('/company_buses/create/{company}', 'BusesController@create');
 
