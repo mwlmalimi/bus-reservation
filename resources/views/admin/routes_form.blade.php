@@ -42,7 +42,7 @@
 
       <div class="form-group">
         <label for="">Description:</label>
-        <input type="text" class="form-control" name="description" required>
+        <textarea class="form-control" name="description" rows="3" required></textarea>
       </div>
 
       <div class="form-group">
