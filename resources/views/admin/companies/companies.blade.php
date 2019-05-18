@@ -17,7 +17,7 @@
 
     <div class="page-header">
       <h3 class="text-primary">Companies</h3>
-      <a class="btn btn-primary" href="#" title="Add Companies">Add Companies</a>
+      <a class="btn btn-primary" href="{{url('/companies/create')}}" title="Add Companies">Add Companies</a>
     </div>
 
     <div class="table-responsive-md">

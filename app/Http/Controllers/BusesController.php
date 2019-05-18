@@ -73,7 +73,7 @@ class BusesController extends Controller
           'plate_number' => $request->plate_number,
           'seats_count' => $request->seats_count,
         ]);
-        return $this->create($company_id, 'Route Assigned Successfully');
+        return $this->create($company_id, 'The Bus is Assigned Successfully');
 
     }
 

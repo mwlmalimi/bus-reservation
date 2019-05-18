@@ -17,6 +17,8 @@
 
 Route::get('/', 'CompaniesController@index');
 
+Route::get('/companies/create/', 'CompaniesController@create');
+
 Route::delete('/companies', 'CompaniesController@destroy');
 
 Route::get('/routes/{company?}', 'RoutesController@index');
