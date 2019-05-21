@@ -91,8 +91,9 @@ class RoutesController extends Controller
      * @param  \App\Route  $route
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Route $route)
-    {
-        //
-    }
+     public function destroy($id)
+     {
+       Route::where('id', $id)->delete();
+       return back()->with('message', 'The Route has been deleted successfully');
+     }
 }

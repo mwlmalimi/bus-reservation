@@ -40,12 +40,14 @@
             <td>{{ $route->name }}</td>
             <td>{{ $route->description }}</td>
             <td>
-              <button class="btn btn-danger" type="button">Delete</button>
-            </td>
+              <button class="btn btn-sm btn-danger" title="delete"
+                type="button"
+                onclick="openConfirmModal({{$route}})">Delete</button>
+           </td>
           </tr>
           @endforeach
         </tbody>
-
+      @include('admin.modals.confirmation_modal')
       </table>
 
     </div>
@@ -88,6 +90,14 @@
       bLengthChange: false
     })
   })
+
+
+  function openConfirmModal(route) {
+    let url = '/routes/' + route.id
+     $("#confirmation_modal_form").attr('action', url)
+     $("#myModal").modal()
+  }
+
 </script>
 
 @endsection

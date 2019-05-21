@@ -37,13 +37,14 @@
         <td>{{ $bus->plate_number }}</td>
           <td>{{ $bus->seats_count }}</td>
         <td>
-          <button class="btn btn-sm btn-danger" type="button"
-            title="delete bus">Delete</button>
+          <button class="btn btn-sm btn-danger" title="delete"
+            type="button"
+            onclick="openConfirmModal({{$bus}})">Delete</button>
         </td>
       </tr>
       @endforeach
     </tbody>
-
+      @include('admin.modals.confirmation_modal')
   </table>
 
 </div>
@@ -54,6 +55,13 @@
       bLengthChange: false
     })
   })
+
+  function openConfirmModal(bus) {
+    let url = '/company_buses/' + bus.id
+     $("#confirmation_modal_form").attr('action', url)
+     $("#myModal").modal()
+  }
+
 </script>
 
 @endsection

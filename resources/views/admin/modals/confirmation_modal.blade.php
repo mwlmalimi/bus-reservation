@@ -10,7 +10,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        You are about to delete this company!
+        You are about to delete this!
       </div>
 
       <!-- Modal footer -->

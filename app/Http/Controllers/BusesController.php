@@ -107,8 +107,11 @@ class BusesController extends Controller
      * @param  \App\Bus  $bus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bus $bus)
-    {
-        //
-    }
+     public function destroy($id)
+     {
+
+         Bus::where('id', $id)->delete();
+         return back()->with('message', 'The Bus has been deleted successfully');
+
+     }
 }

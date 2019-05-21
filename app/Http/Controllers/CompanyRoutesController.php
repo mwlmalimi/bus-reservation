@@ -16,7 +16,7 @@ class CompanyRoutesController extends Controller
      */
     public function index($company_id)
     {
-      
+
         $route_ids = CompanyRoute::where('company_id', $company_id)
                                 ->pluck('id')->toArray();
         $routes = Route::find($route_ids);
@@ -99,8 +99,11 @@ class CompanyRoutesController extends Controller
      * @param  \App\CompanyRoute  $companyRoute
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CompanyRoute $companyRoute)
+    public function destroy($id)
     {
-        //
+
+        CompanyRoute::where('id', $id)->delete();
+        return back()->with('message', 'The Route has been deleted successfully');
+
     }
 }

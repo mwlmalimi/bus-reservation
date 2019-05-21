@@ -29,16 +29,22 @@ Route::get('/routes/create/', 'RoutesController@create');
 
 Route::post('/routes', 'RoutesController@store');
 
+Route::delete('/routes/{route}', 'RoutesController@destroy');
+
 Route::get('/company_routes/{company}', 'CompanyRoutesController@index' );
 
 Route::get('/company_routes/create/{company}', 'CompanyRoutesController@create');
 
 Route::post('/company_routes/{company}', 'CompanyRoutesController@store');
 
+Route::delete('/company_routes/{route}', 'CompanyRoutesController@destroy');
+
 Route::get('/company_buses/{company}', 'BusesController@index');
 
 Route::get('/company_buses/create/{company}', 'BusesController@create');
 
 Route::post('/company_buses/{company}', 'BusesController@store');
+
+Route::delete('/company_buses/{company}', 'BusesController@destroy');
 
 Route::get('/schedules', 'CompaniesController@index');
