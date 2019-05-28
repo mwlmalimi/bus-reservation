@@ -8,7 +8,6 @@
 @include('admin.includes.datatable_buttons')
 
 @endsection
-
 @section('content')
 
 <div class="table-responsive-md">

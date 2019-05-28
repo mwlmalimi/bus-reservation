@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form action="{{ url('/company_routes/' . $company->id) }}" method="post">
+<form action="{{ route('company_routes.store', ['company' => $company->id]) }}" method="post">
 
   <div class="row">
     <div class="col-12">

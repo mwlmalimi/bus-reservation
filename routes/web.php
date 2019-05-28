@@ -15,36 +15,60 @@
 //     return view('companies');
 // });
 
-Route::get('/', 'CompaniesController@index');
+Route::middleware('auth')->group(function() {
+  Route::get('/', 'CompaniesController@index')
+        ->name('companies.index');
 
-Route::get('/companies/create/', 'CompaniesController@create');
+  Route::get('/companies/create/', 'CompaniesController@create')
+        ->name('companies.create');
 
-Route::post('/companies', 'CompaniesController@store');
+  Route::post('/companies', 'CompaniesController@store')
+        ->name('companies.store');
 
-Route::delete('/companies/{company}', 'CompaniesController@destroy');
+  Route::delete('/companies/{company}', 'CompaniesController@destroy')
+        ->name('companies.destroy');
 
-Route::get('/routes', 'RoutesController@index');
+  Route::get('/routes', 'RoutesController@index')->name('routes.index')
+         ->name('routes.index');
 
-Route::get('/routes/create/', 'RoutesController@create');
+  Route::get('/routes/create/', 'RoutesController@create')
+       ->name('routes.create');
 
-Route::post('/routes', 'RoutesController@store');
+  Route::post('/routes', 'RoutesController@store')
+         ->name('routes.store');
 
-Route::delete('/routes/{route}', 'RoutesController@destroy');
+  Route::delete('/routes/{route}', 'RoutesController@destroy')
+           ->name('routes.destroy');
 
-Route::get('/company_routes/{company}', 'CompanyRoutesController@index' );
+  Route::get('/company_routes/{company}', 'CompanyRoutesController@index')
+      ->name('company_routes.index');
 
-Route::get('/company_routes/create/{company}', 'CompanyRoutesController@create');
+  Route::get('/company_routes/create/{company}', 'CompanyRoutesController@create')
+      ->name('company_routes.create');
 
-Route::post('/company_routes/{company}', 'CompanyRoutesController@store');
+  Route::post('/company_routes/{company}', 'CompanyRoutesController@store')
+      ->name('company_routes.store');
 
-Route::delete('/company_routes/{company}/{route}', 'CompanyRoutesController@destroy');
+  Route::delete('/company_routes/{company}/{route}', 'CompanyRoutesController@destroy')
+        ->name('company_routes.destroy');
 
-Route::get('/company_buses/{company}', 'BusesController@index');
+  Route::get('/company_buses/{company}', 'BusesController@index')
+         ->name('company_buses.index');
 
-Route::get('/company_buses/create/{company}', 'BusesController@create');
+  Route::get('/company_buses/create/{company}', 'BusesController@create')
+         ->name('company_buses.create');
 
-Route::post('/company_buses/{company}', 'BusesController@store');
+  Route::post('/company_buses/{company}', 'BusesController@store')
+          ->name('company_buses.store');
 
-Route::delete('/company_buses/{company}', 'BusesController@destroy');
+  Route::delete('/company_buses/{company}', 'BusesController@destroy')
+        ->name('company_buses.destroy');
 
-Route::get('/schedules', 'CompaniesController@index');
+  Route::get('/schedules', 'CompaniesController@index')
+       ->name('schedules.index');
+
+  Route::get('/home', 'HomeController@index')->name('home');
+
+});
+
+Auth::routes();
