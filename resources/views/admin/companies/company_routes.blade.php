@@ -37,7 +37,7 @@
         <td>
           <button class="btn btn-sm btn-danger" title="delete"
             type="button"
-            onclick="openConfirmModal({{$route}})">Delete</button>
+            onclick="openConfirmModal({{$company}},{{$route}})">Delete</button>
         </td>
       </tr>
       @endforeach
@@ -54,8 +54,8 @@
     })
   })
 
-  function openConfirmModal(route) {
-    let url = '/company_routes/' + route.id
+  function openConfirmModal(company, route) {
+    let url = '/company_routes/'+company.id + '/' + route.id
      $("#confirmation_modal_form").attr('action', url)
      $("#myModal").modal()
   }

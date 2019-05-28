@@ -47,7 +47,7 @@ class RoutesController extends Controller
           'description' =>$request->description,
         ]);
 
-        $message='The company added successfully';
+        $message='The route has been added successfully';
         return back()->with('message', $message);
     }
 
