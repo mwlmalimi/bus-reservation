@@ -23,6 +23,18 @@
         align-items: center;
         padding: 4px;
       }
+      .navbar li a:hover{
+        background-color:black;
+      }
+      .active{
+        background-color:#000;
+        text-decoration: none;
+      }
+      .dropdown-menu{
+        background-color:orange;
+        text-decoration: #fff;
+      }
+
     </style>
   </head>
   <body>
@@ -35,10 +47,10 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
               @auth
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item {{ areActiveRoutes(['companies.*', 'company_routes.*']) }}">
+                <li class="nav-item {{ areActiveRoutes(['companies.*', 'company_routes.*', 'company_buses.*']) }}">
                   <a class="nav-link" href="{{url('/')}}">Companies</a>
                 </li>
-                <li class="nav-item {{ isActiveURL('/routes') }}">
+                <li class="nav-item {{ areActiveRoutes(['routes.*']) }}">
                   <a class="nav-link" href="{{url('/routes')}}">Routes</a>
                 </li>
                 <li class="nav-item {{ isActiveURL('/schedules') }}">
@@ -63,7 +75,7 @@
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" class="form-control" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </div>

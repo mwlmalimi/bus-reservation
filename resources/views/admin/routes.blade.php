@@ -19,7 +19,17 @@
       <h3 class="text-primary">Routes</h3>
       <a class="btn btn-primary" href="{{url('/routes/create')}}" title="Add Routes">Add Routes</a>
     </div>
-
+    
+        @if(session('message'))
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Success!</strong> {{session('message')}}.
+            </div>
+          </div>
+        </div>
+        @endif
     <div class="table-responsive-md">
 
       <table id="routesTable"
