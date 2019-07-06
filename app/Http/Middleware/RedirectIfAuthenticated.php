@@ -18,7 +18,12 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+          $company_id = request()->user()->company_id;
+          if($company_id === null) {
+            //The user is super admin
+            return redirect('/companies');
+          }
+          return redirect()->route('company_buses.index', ['company' => $company_id]);
         }
 
         return $next($request);

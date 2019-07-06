@@ -43,7 +43,7 @@
   <body>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <a class="navbar-brand" href="#">Bus Reservation</a>
+      <a class="navbar-brand" href="{{url('/')}}">Bus Reservation</a>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -57,21 +57,6 @@
                 </li>
                 @endcan
 
-                @if(request()->user()->company_id === null)
-
-                  <li class="nav-item {{ areActiveRoutes(['routes.*']) }}">
-                    <a class="nav-link" href="{{url('/routes')}}">Routes</a>
-                  </li>
-
-                @else
-
-                  <li class="nav-item {{ areActiveRoutes(['routes.*', 'company_routes.*']) }}">
-                    <a
-                      class="nav-link"
-                      href="{{route('company_routes.index', ['company' => $company->id])}}">Routes</a>
-                  </li>
-
-                @endif
                 @can('create', 'App\Bus')
 
                     <li class="nav-item {{ areActiveRoutes(['buses.*', 'company_buses.*']) }}">
@@ -82,7 +67,7 @@
                 @endcan
 
                 @can('create', 'App\Schedule')
-                <li class="nav-item {{ isActiveRoute('company_schedules.index') }}">
+                <li class="nav-item {{ areActiveRoutes(['company_schedules.*']) }}">
                   <a class="nav-link"
                     href="{{route('company_schedules.index', ['company' => $company->id])}}">
                     Schedules
@@ -90,11 +75,11 @@
                 </li>
                 @endcan
 
-                @can('create', 'App\Passenger')
+                {{--@can('create', 'App\Passenger')
                 <li class="nav-item {{ isActiveURL('/passengers') }}">
                   <a class="nav-link" href="{{url('/passengers')}}">Passengers</a>
                 </li>
-                @endcan
+                @endcan--}}
 
               </ul>
               @endauth

@@ -61,6 +61,11 @@
         <label for="">Departure Time:</label>
         <input type="datetime" class="form-control" name="departure_time" required>
       </div>
+      
+      <div class="form-group">
+        <label for="">Price:</label>
+        <input type="text" class="form-control" name="fare" required>
+      </div>
 
       <div class="form-group">
         <button class="btn btn-primary float-right" type="submit">Create+</button>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompaniesTable extends Migration
+class AddFareToSchedules extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->timestamps();
-        });
+      Schema::table('schedules', function (Blueprint $table) {
+        $table->bigInteger('fare')->nullable();
+      });
     }
 
     /**
@@ -27,6 +25,8 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::table('schedules', function (Blueprint $table) {
+            //
+        });
     }
 }

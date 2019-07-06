@@ -48,9 +48,9 @@ class LoginController extends Controller
       $company_id = request()->user()->company_id;
       if($company_id === null) {
         //The user is super admin
-        return '/';
+        return '/companies';
       }
-      return route('company_routes.index', ['company' => $company_id]);
+      return route('company_buses.index', ['company' => $company_id]);
     }
 
     public function logout(Request $request)

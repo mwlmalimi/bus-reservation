@@ -13,20 +13,20 @@ class CreatePassengersTable extends Migration
      */
     public function up()
     {
-        // Schema::create('passengers', function (Blueprint $table) {
-        //     $table->bigIncrements('id');
-        //     $table->string('first_name');
-        //     $table->string('last_name');
-        //     $table->bigInteger('phone_number');
-        //     $table->string('confirmation_code');
-        //     $table->string('seats_taken');
-        //     $table->unsignedBigInteger('booked_bus_id');
-        //     $table->timestamps();
-        //     //foreign key
-        //     $table->foreign('booked_bus_id')->references('id')
-        //           ->on('booked_buses')->onDelete('cascade')
-        //           ->onUpdate('cascade');
-        // });
+      Schema::create('passengers', function (Blueprint $table) {
+        $table->bigIncrements('id');
+        $table->string('first_name');
+        $table->string('last_name');
+        $table->string('phone_number');
+        $table->string('email');
+        $table->string('seats_taken');
+        $table->unsignedBigInteger('schedule_id')->nullable();
+        $table->timestamps();
+        //foreign key
+        $table->foreign('schedule_id')->references('id')
+              ->on('schedules')->onDelete('set null');
+              ->onUpdate('cascade');
+      });
     }
 
     /**

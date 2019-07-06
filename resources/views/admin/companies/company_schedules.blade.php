@@ -31,6 +31,7 @@
         <th class="th-sm">Bus</th>
         <th class="th-sm">Departure Date</th>
         <th class="th-sm">Departure Time</th>
+        <th class="th-sm">Price</th>
         <th class="th-sm">Actions</th>
       </tr>
     </thead>
@@ -43,6 +44,7 @@
         <td>{{ $schedule->bus->name }}</td>
         <td>{{ $schedule->departure_date }}</td>
         <td>{{ $schedule->departure_time }}</td>
+        <td>{{ $schedule->fare }}</td>
         <td>
           <button class="btn btn-sm btn-danger" title="delete"
             type="button"

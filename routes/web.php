@@ -11,8 +11,6 @@
 |
 */
 
-Route::view('/book_bus', 'passenger.book_form');
-
 Route::get('/', function () {
   return view('passenger.home');
 });
@@ -20,6 +18,8 @@ Route::get('/', function () {
 Route::get('/searchCompanies', 'SchedulesController@searchCompanies');
 
 Route::get('/searchSchedules/{company}', 'SchedulesController@searchSchedules');
+
+Route::get('/book_bus/{schedule}', 'PassengersController@bookTicketForm');
 
 Route::middleware('auth')->group(function() {
 

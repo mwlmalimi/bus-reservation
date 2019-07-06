@@ -102,16 +102,24 @@
             row.innerHTML = "<td>" + schedules[i].bus.plate_number + "</td>" +
                             "<td>" + schedules[i].departure_date + "</td>" +
                             "<td>" + schedules[i].departure_time + "</td>" +
-                            "<td><button type='button' class='btn btn-primary'>Book</button></td>"
+                            "<td class='d-none'>" + schedules[i].id + "</td>" +
+                            "<td>"+
+                            "<a class='book-btn btn btn-primary'>"+
+                            "Book</a></td>"
             schedulesBody.appendChild(row)
           }
 
           document.getElementById("schedules").style.display = "block"
-
+          
+          $("a.book-btn").on("click", function () {
+            let scheduleId = $(this).parent().prev("td").text()
+            window.location.href = "/book_bus/" + scheduleId
+          })
+          
         })
         .fail(function (error) {
           console.log(error);
-        })
+        })      
     }
 
   </script>

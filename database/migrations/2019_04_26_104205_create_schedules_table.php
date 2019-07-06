@@ -21,6 +21,7 @@ class CreateSchedulesTable extends Migration
             $table->unsignedBigInteger('bus_id');
             $table->date('departure_date');
             $table->string('departure_time');
+            $table->bigInteger('fare');
             $table->string('status')->default('pending');
             $table->timestamps();
             // Setting foreign keys

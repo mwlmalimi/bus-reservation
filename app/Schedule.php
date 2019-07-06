@@ -8,7 +8,7 @@ class Schedule extends Model
 {
   protected $fillable = [
     'origin', 'destination', 'company_id', 'bus_id', 'departure_date',
-    'departure_time', 'status',
+    'departure_time', 'fare', 'status',
   ];
 
   public function company()
