@@ -13,10 +13,10 @@
 <div class="table-responsive-md">
 
   <div class="page-header">
-    <h3 class="text-primary">{{$company->name}} Routes</h3>
+    <h3 class="text-primary">{{$company->name}} Schedules</h3>
     @if(request()->user()->company_id !== null)
-    <a class="btn btn-primary" href="{{ url('/company_routes/create/' . $company->id) }}"
-      title="Assign Routes">Assign</a>
+    <a class="btn btn-primary" href="{{ url('/company_schedules/create/' . $company->id) }}"
+      title="Assign schedules">Create</a>
     @endif
   </div>
 
@@ -26,19 +26,27 @@
 
     <thead>
       <tr>
-        <th class="th-sm">Name</th>
+        <th class="th-sm">From</th>
+        <th class="th-sm">To</th>
+        <th class="th-sm">Bus</th>
+        <th class="th-sm">Departure Date</th>
+        <th class="th-sm">Departure Time</th>
         <th class="th-sm">Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      @foreach($routes as $route)
+      @foreach($schedules as $schedule)
       <tr>
-        <td>{{ $route->name }}</td>
+        <td>{{ $schedule->origin }}</td>
+        <td>{{ $schedule->destination }}</td>
+        <td>{{ $schedule->bus->name }}</td>
+        <td>{{ $schedule->departure_date }}</td>
+        <td>{{ $schedule->departure_time }}</td>
         <td>
           <button class="btn btn-sm btn-danger" title="delete"
             type="button"
-            onclick="openConfirmModal({{$company}},{{$route}})">Delete</button>
+            onclick="openConfirmModal({{$company}},{{$schedule}})">Delete</button>
         </td>
       </tr>
       @endforeach
@@ -55,8 +63,8 @@
     })
   })
 
-  function openConfirmModal(company, route) {
-    let url = '/company_routes/'+company.id + '/' + route.id
+  function openConfirmModal(company, schedule) {
+    let url = '/company_schedules/'+company.id + '/' + schedule.id
      $("#confirmation_modal_form").attr('action', url)
      $("#myModal").modal()
   }

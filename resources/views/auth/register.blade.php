@@ -1,46 +1,111 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin_layout')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+      {{--<marquee>
+        <h1 style="color:blue;">
+          <b>WELCOME TO ONLINE BUS TICKET RESERVATION SYSTEM.</b>
+        </h1>
+      </marquee>--}}
         <div class="col-md-8">
+
+            @if(session('message'))
+            <div class="row">
+              <div class="col-12">
+                <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <strong>Success!</strong> {{session('message')}}.
+                </div>
+              </div>
+            </div>
+            @endif
+
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Register Here') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="company_name" class="col-md-4 col-form-label text-md-right">
+                              {{ __('Company Name') }}
+                            </label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="company_name" type="text"
+                                  class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                  name="company_name" value="{{ old('company_name') }}"
+                                  required autocomplete="company_name" autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('company_name'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('company_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                          <label for="name" class="col-md-4 col-form-label text-md-right">
+                            {{ __('Administrator Name') }}
+                          </label>
+
+                          <div class="col-md-6">
+                              <input id="name" type="text"
+                                class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                name="name" value="{{ old('name') }}"
+                                required autocomplete="name">
+
+                              @if ($errors->has('name'))
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $errors->first('name') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="name" class="col-md-4 col-form-label text-md-right">
+                            {{ __('Administrator Email') }}
+                          </label>
+
+                          <div class="col-md-6">
+                              <input id="email" type="text"
+                                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                name="email" value="{{ old('email') }}"
+                                required autocomplete="email">
+
+                              @if ($errors->has('email'))
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $errors->first('email') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">
+                              {{ __('Administrator Username') }}
+                            </label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="username" type="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autocomplete="username">
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('username'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">
+                              {{ __('Administrator Password') }}
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required autocomplete="new-password">

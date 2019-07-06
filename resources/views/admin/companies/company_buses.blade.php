@@ -15,8 +15,10 @@
 
   <div class="page-header">
     <h3 class="text-primary"> {{ $company->name }}  Buses</h3>
+    @if(request()->user()->company_id !== null)
     <a class="btn btn-primary" href="{{ url('/company_buses/create/' . $company->id) }}"
       title="Add Buses">Assign</a>
+    @endif
   </div>
 
   <table id="myTable"
@@ -27,7 +29,9 @@
       <tr>
         <th class="th-sm">Plate number</th>
           <th class="th-sm">Number of seats</th>
-        <th class="th-sm">Actions</th>
+          @if(request()->user()->company_id !== null)
+          <th class="th-sm">Actions</th>
+          @endif
       </tr>
     </thead>
 
@@ -36,11 +40,13 @@
       <tr>
         <td>{{ $bus->plate_number }}</td>
           <td>{{ $bus->seats_count }}</td>
-        <td>
-          <button class="btn btn-sm btn-danger" title="delete"
-            type="button"
-            onclick="openConfirmModal({{$bus}})">Delete</button>
-        </td>
+          @if(request()->user()->company_id !== null)
+          <td>
+            <button class="btn btn-sm btn-danger" title="delete"
+              type="button"
+              onclick="openConfirmModal({{$bus}})">Delete</button>
+          </td>
+          @endif
       </tr>
       @endforeach
     </tbody>

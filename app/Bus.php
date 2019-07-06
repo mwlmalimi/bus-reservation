@@ -9,7 +9,7 @@ use App\BookedBus;
 class Bus extends Model
 {
   protected $fillable = [
-    'company_id', 'plate_number', 'seats_count',
+    'company_id', 'plate_number', 'name', 'seats_count',
   ];
 
   public function company()

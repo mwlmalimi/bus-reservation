@@ -33,12 +33,13 @@
       @csrf
 
       <div class="form-group">
-        <label for="busSelector">Buses:</label>
-        <div class="form-group">
-          <label for="">Plate Number:</label>
-          <input type="text" class="form-control" name="plate_number" required>
-        </div>
+        <label for="">Plate Number:</label>
+        <input type="text" class="form-control" name="plate_number" required>
+      </div>
 
+      <div class="form-group">
+        <label for="busSelector">Name:</label>
+        <input type="text" class="form-control" name="name" required>
       </div>
 
       <div class="form-group">

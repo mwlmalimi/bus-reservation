@@ -4,10 +4,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
+            @if(session('message'))
+            <div class="row">
+              <div class="col-12">
+                <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <strong>Success!</strong> {{session('message')}}.
+                </div>
+              </div>
+            </div>
+            @endif
+
+            <div class="card">
+                <div class="card-header bg-primary">{{ __('Login') }}</div>
+
+                <div class="card-body bg-success">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

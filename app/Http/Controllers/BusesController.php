@@ -61,6 +61,7 @@ class BusesController extends Controller
            Bus::create([
           'company_id' => $company_id,
           'plate_number' => $request->plate_number,
+          'name' => $request->name,
           'seats_count' => $request->seats_count,
         ]);
         return back()->with('message', 'The Bus is Assigned Successfully');

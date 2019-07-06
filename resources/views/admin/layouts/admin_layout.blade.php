@@ -9,7 +9,7 @@
     <title>Bus Reservation</title>
     <style media="screen">
       body {
-        background-color: #fff;
+        background-color:#fff;
         font-weight: 200;
         height: 100vh;
         margin: 0;
@@ -23,23 +23,26 @@
         align-items: center;
         padding: 4px;
       }
+      .navbar{
+        color: #fff;
+      }
       .navbar li a:hover{
-        background-color:black;
+        background-color:#000;
+        color: #fff;
       }
       .active{
-        background-color:#000;
+        background-color:blue;
         text-decoration: none;
       }
       .dropdown-menu{
         background-color:orange;
-        text-decoration: #fff;
       }
 
     </style>
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <a class="navbar-brand" href="#">Bus Reservation</a>
        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
@@ -47,25 +50,64 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
               @auth
               <ul class="navbar-nav mr-auto">
+
+                @can('view')
                 <li class="nav-item {{ areActiveRoutes(['companies.*', 'company_routes.*', 'company_buses.*']) }}">
                   <a class="nav-link" href="{{url('/')}}">Companies</a>
                 </li>
-                <li class="nav-item {{ areActiveRoutes(['routes.*']) }}">
-                  <a class="nav-link" href="{{url('/routes')}}">Routes</a>
+                @endcan
+
+                @if(request()->user()->company_id === null)
+
+                  <li class="nav-item {{ areActiveRoutes(['routes.*']) }}">
+                    <a class="nav-link" href="{{url('/routes')}}">Routes</a>
+                  </li>
+
+                @else
+
+                  <li class="nav-item {{ areActiveRoutes(['routes.*', 'company_routes.*']) }}">
+                    <a
+                      class="nav-link"
+                      href="{{route('company_routes.index', ['company' => $company->id])}}">Routes</a>
+                  </li>
+
+                @endif
+                @can('create', 'App\Bus')
+
+                    <li class="nav-item {{ areActiveRoutes(['buses.*', 'company_buses.*']) }}">
+                      <a
+                        class="nav-link"
+                        href="{{route('company_buses.index', ['company' => $company->id])}}">Buses</a>
+                    </li>
+                @endcan
+
+                @can('create', 'App\Schedule')
+                <li class="nav-item {{ isActiveRoute('company_schedules.index') }}">
+                  <a class="nav-link"
+                    href="{{route('company_schedules.index', ['company' => $company->id])}}">
+                    Schedules
+                  </a>
                 </li>
-                <li class="nav-item {{ isActiveURL('/schedules') }}">
-                  <a class="nav-link" href="{{url('/schedules')}}">Schedules</a>
-                </li>
+                @endcan
+
+                @can('create', 'App\Passenger')
                 <li class="nav-item {{ isActiveURL('/passengers') }}">
                   <a class="nav-link" href="{{url('/passengers')}}">Passengers</a>
                 </li>
+                @endcan
+
               </ul>
+              @endauth
               <!-- Right Side Of Navbar -->
               <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-                <li class="active nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                @auth
+
+                <li class="nav-item dropdown">
+
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle"  role="button" data-toggle="dropdown"
+                    aria-haspopup="true"  style="color:#fff;" aria-expanded="false" v-pre>
+                      <h6 style="color:#fff;">Signed in, {{ Auth::user()->name }} </h6>  <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -80,8 +122,19 @@
                         </form>
                     </div>
                 </li>
+                @endauth
+
+                @guest
+
+                @if(!isActiveRoute('register'))
+                  <li class="active nav-item bg-dark" style="color:#000;">
+                    <a href="{{ route('register') }}">Register Company</a>
+                  </li>
+                @endif
+
+                @endguest
+
               </ul>
-              @endauth
           </div>
     </nav>
 

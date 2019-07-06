@@ -11,12 +11,19 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('companies');
-// });
+Route::view('/book_bus', 'passenger.book_form');
+
+Route::get('/', function () {
+  return view('passenger.home');
+});
+
+Route::get('/searchCompanies', 'SchedulesController@searchCompanies');
+
+Route::get('/searchSchedules/{company}', 'SchedulesController@searchSchedules');
 
 Route::middleware('auth')->group(function() {
-  Route::get('/', 'CompaniesController@index')
+
+  Route::get('/companies', 'CompaniesController@index')
         ->name('companies.index');
 
   Route::get('/companies/create/', 'CompaniesController@create')
@@ -64,8 +71,17 @@ Route::middleware('auth')->group(function() {
   Route::delete('/company_buses/{company}', 'BusesController@destroy')
         ->name('company_buses.destroy');
 
-  Route::get('/schedules', 'CompaniesController@index')
-       ->name('schedules.index');
+  Route::get('/company_schedules/{company}', 'SchedulesController@index')
+       ->name('company_schedules.index');
+
+  Route::get('/company_schedules/create/{company}', 'SchedulesController@create')
+       ->name('company_schedules.create');
+
+  Route::post('/company_schedules/{company}', 'SchedulesController@store')
+       ->name('company_schedules.store');
+
+  Route::delete('/company_schedules/{company}/{schedule}', 'SchedulesController@destroy')
+         ->name('company_schedules.destroy');
 
   Route::get('/home', 'HomeController@index')->name('home');
 

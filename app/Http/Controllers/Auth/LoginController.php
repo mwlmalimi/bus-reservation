@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    // protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -41,6 +41,16 @@ class LoginController extends Controller
     public function username()
     {
       return 'username';
+    }
+
+    public function redirectTo()
+    {
+      $company_id = request()->user()->company_id;
+      if($company_id === null) {
+        //The user is super admin
+        return '/';
+      }
+      return route('company_routes.index', ['company' => $company_id]);
     }
 
     public function logout(Request $request)

@@ -15,8 +15,12 @@ class Company extends Model
   {
     return $this->hasMany('App\Bus');
   }
-  
+
   public function companyRoutes(){
     return $this->hasMany('App\CompanyRoute');
+  }
+
+  public function schedules(){
+    return $this->hasMany('App\Schedule');
   }
 }

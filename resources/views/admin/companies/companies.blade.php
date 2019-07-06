@@ -101,8 +101,8 @@
             messageTop: "The List Of Companies As Of {{date('d-m-Y')}}"
          }
        ],
-      iDisplayLength: 5,
-      bLengthChange: false
+      iDisplayLength: 6,
+      bLengthChange: true
     })
   })
 
