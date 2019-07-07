@@ -21,6 +21,12 @@ Route::get('/searchSchedules/{company}', 'SchedulesController@searchSchedules');
 
 Route::get('/book_bus/{schedule}', 'PassengersController@bookTicketForm');
 
+Route::post('/book_bus/{schedule}', 'PassengersController@savePassengerToSession');
+
+Route::get('/payment_form', 'PassengersController@paymentForm');
+
+Route::post('/payment', 'PassengersController@book');
+
 Route::middleware('auth')->group(function() {
 
   Route::get('/companies', 'CompaniesController@index')

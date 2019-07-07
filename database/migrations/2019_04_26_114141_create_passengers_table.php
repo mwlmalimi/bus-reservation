@@ -18,13 +18,13 @@ class CreatePassengersTable extends Migration
         $table->string('first_name');
         $table->string('last_name');
         $table->string('phone_number');
-        $table->string('email');
+        $table->string('email')->nullable();
         $table->string('seats_taken');
         $table->unsignedBigInteger('schedule_id')->nullable();
         $table->timestamps();
         //foreign key
         $table->foreign('schedule_id')->references('id')
-              ->on('schedules')->onDelete('set null');
+              ->on('schedules')->onDelete('set null')
               ->onUpdate('cascade');
       });
     }

@@ -13,8 +13,10 @@
 
 
 
-<form class="">
+<form action="{{url('/book_bus/' . $schedule->id)}}" method="post">
   
+  @csrf
+    
   <div class="row">
     
     <div class="col-md-6">
