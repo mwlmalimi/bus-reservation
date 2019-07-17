@@ -1,5 +1,13 @@
 @extends('passenger.layouts.passenger_layout')
 
+@section('more-headers')
+<style>
+  .fa-spinner {
+    /*font-size: 32px;*/
+  }
+</style>
+@endsection
+
 @section('content')
 
 <form class="" onsubmit="event.preventDefault(); searchCompanies();">
@@ -20,7 +28,7 @@
         class="form-control" id="destination" required>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="margin-top: 30px;">
       <button type="submit" name="button"
         class="btn btn-secondary">search</button>
     </div>
@@ -34,6 +42,13 @@
         onchange="searchSchedules()">
         <option value="" selected disabled>select company</option>
       </select>
+    </div>
+  </div>
+  
+  <div class="row" id="progress" style="margin-top: 30px;">
+    <div class="col-9 text-center">
+      <i class="fa fa-spinner fa-spin fa-3x text-primary" aria-hidden="true"></i><br>
+      <span>fetching ...</span>
     </div>
   </div>
 
@@ -52,10 +67,13 @@
 
   <script type="text/javascript">
 
+    document.getElementById("progress").style.display = "none"
     document.getElementById("companies").style.display = "none"
     document.getElementById("schedules").style.display = "none"
 
     function searchCompanies () {
+      
+      document.getElementById("progress").style.display = "block"
 
       $("#companySelect").val("")
 
@@ -78,7 +96,10 @@
             mySelect.appendChild(opt)
           }
 
-          document.getElementById("companies").style.display = "block"
+          setTimeout(function () {
+            document.getElementById("progress").style.display = "none"
+            document.getElementById("companies").style.display = "block"
+          }, 3000)
 
         })
         .fail(function (error) {
@@ -87,6 +108,9 @@
     }
 
     function searchSchedules() {
+      
+      document.getElementById("progress").style.display = "block"
+
       let company_id = $("#companySelect").val()
       let origin = $("#origin").val()
       let destination = $("#destination").val()
@@ -108,8 +132,11 @@
                             "Book</a></td>"
             schedulesBody.appendChild(row)
           }
-
-          document.getElementById("schedules").style.display = "block"
+          
+          setTimeout(function () {
+            document.getElementById("progress").style.display = "none"
+            document.getElementById("schedules").style.display = "block"
+          }, 3000);
           
           $("a.book-btn").on("click", function () {
             let scheduleId = $(this).parent().prev("td").text()

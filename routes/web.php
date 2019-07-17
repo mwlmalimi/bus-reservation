@@ -27,6 +27,8 @@ Route::get('/payment_form', 'PassengersController@paymentForm');
 
 Route::post('/payment', 'PassengersController@book');
 
+Route::get('/receipt', 'PassengersController@receipt');
+
 Route::middleware('auth')->group(function() {
 
   Route::get('/companies', 'CompaniesController@index')

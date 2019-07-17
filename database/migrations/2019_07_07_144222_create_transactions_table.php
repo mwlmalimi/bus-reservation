@@ -13,13 +13,18 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('transaction_code');
-            $table->string('reference_number');
-            $table->bigInteger('amount');
-            $table->timestamps();
-        });
+      Schema::create('transactions', function (Blueprint $table) {
+          $table->bigIncrements('id');
+          $table->string('transaction_code');
+          $table->unsignedBigInteger('passenger_id')->nullable();
+          $table->string('reference_number');
+          $table->bigInteger('amount');
+          $table->timestamps();
+          // foreign key
+          $table->foreign('passenger_id')->references('id')
+                ->on('passengers')->onDelete('cascade')
+                ->onUpdate('cascade');
+      });
     }
 
     /**

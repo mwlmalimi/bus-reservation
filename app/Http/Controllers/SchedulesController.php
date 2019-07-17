@@ -125,6 +125,7 @@ class SchedulesController extends Controller
       $schedules =  Schedule::where('origin', $origin)
                             ->where('destination', $destination)
                             ->where('company_id', $company_id)
+                            ->where('status', 'pending')
                             ->with('bus')
                             ->get();
       return $schedules;

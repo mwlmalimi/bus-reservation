@@ -26,7 +26,7 @@
         <h4 class="card-header">Select a seat</h4>
         
         <div class="card-body">
-          @php $seat_no = 1; @endphp
+          @php $seat_no = 10; @endphp
           
           @for ($i = 0; $i < 5; $i++)
             
@@ -35,8 +35,9 @@
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input bus-seat" 
                     name="seats_taken" 
-                    value="{{$seat_no < 10 ? '0'.$seat_no : $seat_no }}">
-                    {{$seat_no < 10 ? '0'.$seat_no : $seat_no }}
+                    value="{{$seat_no}}" 
+                    {{in_array($seat_no, $seats_taken) ? 'disabled' : ''}}>
+                    {{ $seat_no }}
                 </label>
               </div>
               

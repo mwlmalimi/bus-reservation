@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Passenger;
 use App\Schedule;
+use App\BookedSchedule;
 use App\Bus;
 use App\Transaction;
 use Illuminate\Http\Request;
@@ -47,7 +48,12 @@ class PassengersController extends Controller
       $bus = Bus::find($bus_id);
       $company = $bus->company()->first();
       $schedule = Schedule::find($schedule_id);
-      return view('passenger.book_form',compact('schedule', 'company', 'bus'));
+      $seats_taken = [];
+      $booked_schedule = BookedSchedule::where('schedule_id', $schedule_id)->first();
+      if ($booked_schedule !== null) {
+        $seats_taken = explode(", ", $booked_schedule->seats_taken);
+      }
+      return view('passenger.book_form',compact('schedule', 'company', 'bus', 'seats_taken'));
     }
     
     public function savePassengerToSession(Request $request, $schedule_id)
@@ -81,8 +87,23 @@ class PassengersController extends Controller
           $schedule = Schedule::find(session('passenger')->schedule_id);
           if($transaction->amount === $schedule->fare) {
             $passenger = session('passenger');
-            $passenger->save();
-            return view('passenger.receipt', []);
+            $passenger = Passenger::create([
+              'first_name' => $passenger->first_name,
+              'last_name' => $passenger->last_name,
+              'phone_number' => $passenger->phone_number,
+              'email' => $passenger->email,
+              'seats_taken' => $passenger->seats_taken,
+              'schedule_id' => $passenger->schedule_id,
+            ]);
+            $transaction->passenger_id = $passenger->id;
+            $transaction->status = 'redeemed';
+            $transaction->save();
+            $this->bookSchedule($schedule->id, $passenger->seats_taken);
+            return view('passenger.receipt', [
+              'reference_number' => $transaction->reference_number,
+              'passenger' => $passenger,
+              'schedule' => $schedule,
+            ]);
           } else {
             return back()->with('message', 'Insufficient Amount');
           }
@@ -91,6 +112,21 @@ class PassengersController extends Controller
         }
       } else {
         return back()->with('message', 'Invalid code');
+      }
+    }
+    
+    private function bookSchedule($schedule_id, $seats_taken)
+    {
+      $record = BookedSchedule::where('schedule_id', $schedule_id)->first();
+      if ($record !== null) {
+        $current_seats_taken = $record->seats_taken . ", " . $seats_taken;
+        $record->seats_taken = $current_seats_taken;
+        $record->save();
+      } else {
+        BookedSchedule::create([
+          'schedule_id' => $schedule_id,
+          'seats_taken' => $seats_taken,
+        ]);
       }
     }
 
